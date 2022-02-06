@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
@@ -21,7 +21,7 @@ const Logo = styled.div`
   top: 0;
   left: 0;
   padding: 0px 10px;
-  color:white;
+  color: white;
   font-weight: bold;
 `;
 
@@ -101,20 +101,18 @@ const Disconnect = styled(Wallet)`
   }
 `;
 
-
-const Header = () =>
-
-{
-
+const Header = ({ account, onConnectWallet, onDisconnect }) => {
+  const userAddress = account
+    ? account.slice(0, 6) + "...." + account.slice(-4)
+    : null;
   return (
-      <>
+    <>
       <HeaderContainer>
-          <Logo> 
+        <Logo>
           <h2>EventDAO</h2>
-          </Logo>
+        </Logo>
 
-          <HeaderFields>
-
+        <HeaderFields>
           <Item exact to="/" activeClassName="selected">
             <h4>Home</h4>
           </Item>
@@ -126,18 +124,21 @@ const Header = () =>
           <Item exact to="/Organizers" activeClassName="selected">
             <h4> Organizers </h4>
           </Item>
+        </HeaderFields>
 
-
-          </HeaderFields>
-
-
-         
-        <Wallet >
-          <h3>Connect Wallet</h3>
-        </Wallet>
-
+        {account === "" || typeof account === "undefined" ? (
+          <Wallet onClick={onConnectWallet}>
+            <h3>Connect Wallet</h3>
+          </Wallet>
+        ) : (
+          <Disconnect onClick={onDisconnect}>
+            <h3>
+              <span>{userAddress}</span>
+            </h3>
+          </Disconnect>
+        )}
       </HeaderContainer>
-      </>
+    </>
   );
 };
 
