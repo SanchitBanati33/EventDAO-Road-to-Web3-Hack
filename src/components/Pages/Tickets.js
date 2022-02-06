@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Ticket from "../images/Organizer.png";
+import QR from "../images/QR.png";
 
 const Grid = styled.div`
   display: flex;
@@ -48,6 +49,51 @@ const Img = styled.div`
 `;
 const Title = styled.h1`
   margin: 0 8%;
+  color: blue;
+  text-align: center;
+`;
+
+const PopUp = styled.div`
+
+height: 400px; 
+width: 500px; 
+background-color:white;
+border: solid 2px yellow;
+border-radius: 5%;
+padding: 20px 0 0 0 ;
+
+`;
+
+const Generate = styled.button`
+text-decoration: none;
+height: 40px;
+width: 100px;
+border-radius: 50px;
+color: black;
+
+border: 1px solid white;
+display: grid;
+align-content: center;
+text-align:center;
+justify-content: space-around;
+margin: 15px 0px 0 200px;
+transition: 0.3s ease-in;
+
+&:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  background-color: #25b04a;
+}
+
+&.selected {
+  background-color: #25b04a;
+  transform: scale(1.1);
+}
+
+`;
+
+const QrCode = styled.div`
+
 `;
 
 const Tickets = ({ ticketsData }) => {
@@ -67,6 +113,15 @@ const Tickets = ({ ticketsData }) => {
         })}
       </Grid>
     </>
+
+    // <>
+    // <PopUp> 
+    //   <Title> Get your QR Code </Title>
+    //   <Generate> Generate </Generate>
+    //   <img src={QR} height="250px" border-radius="5%"/>
+    // </PopUp>  
+
+    // </>
   );
 };
 
