@@ -41,6 +41,7 @@ var OName = "Sanchit";
 var NftId = "6969";
 
 const Organizers = ({ account }) => {
+  const [confirmed, setConfirmed] = React.useState(false);
   // A custom hook that builds on useLocation to parse
   // the query string for you.
   function useQuery() {
@@ -62,8 +63,10 @@ const Organizers = ({ account }) => {
       const res = await axios.post(url, scannedToken);
       console.log(res);
       console.log("scanned token succesfully added");
+      setConfirmed(true);
     } catch (err) {
       console.error(err);
+      setConfirmed(true);
     }
   };
 
@@ -73,7 +76,11 @@ const Organizers = ({ account }) => {
         <Name> Scanner Person : {OName} </Name>
         <Name> Owner Address : {query.get("ownerAddress")} </Name>
         <Id> NFT ID : {query.get("tokenId")} </Id>
-        <Confirm onClick={confirmScan}> Confirm </Confirm>
+        {confirmed ? (
+          <Name style={{ color: "yellow" }}>Confirmed!!</Name>
+        ) : (
+          <Confirm onClick={confirmScan}> Confirm </Confirm>
+        )}
       </Container>
     </>
   );

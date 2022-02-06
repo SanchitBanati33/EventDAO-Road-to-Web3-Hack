@@ -12,8 +12,7 @@ import NFTTicket from "./ethereum/NFTTicket";
 import ErrorPage from "./components/ErrorPage";
 const axios = require("axios");
 
-const infuraId = "97c2d52095a84da7a0b710a8daa16acf";
-// // "https://rinkeby.infura.io/v3/97c2d52095a84da7a0b710a8daa16acf";
+const infuraId = process.env.REACT_APP_INFURA_ID;
 
 const providerOptions = {
   walletconnect: {
@@ -22,9 +21,8 @@ const providerOptions = {
       rpc: {
         1: `https://mainnet.infura.io/v3/${infuraId}`,
         4: `https://rinkeby.infura.io/v3/${infuraId}`,
-        // 137: `https://polygon-mainnet.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_KEY}`,
-        80001:
-          "https://polygon-mumbai.g.alchemy.com/v2/ACUeLJ1FpSjia-iomEar1cBhZo3TU4Ad",
+        137: `https://polygon-mainnet.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_KEY}`,
+        80001: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_API_KEY}`,
       },
     },
   },
@@ -144,20 +142,25 @@ const App = () => {
           .tokenOfOwnerByIndex(userAddress, i)
           .call();
 
-        const nftTicketContractAddress =
-          "0x0463E2FED074C5F6736C28a856F4efD05ADA1B8f";
-        const chainid = "80001"; // mumbai
-        const url = `https://api.covalenthq.com/v1/${chainid}/tokens/${nftTicketContractAddress}/nft_metadata/${tokenId}/?key=ckey_docs`;
-        const { data } = await axios.get(url);
-        let nftData;
-        if (data.data?.items[0].nft_data) {
-          console.log(data.data?.items[0].nft_data[0].external_data);
-          nftData = data.data?.items[0].nft_data[0].external_data;
-        }
+        const tokenUri = await NFTTicket.methods.tokenURI(tokenId).call();
+        const { data } = await axios.get(tokenUri);
+        console.log("token uri: ", data);
+
+        // const nftTicketContractAddress =
+        //   "0x0463E2FED074C5F6736C28a856F4efD05ADA1B8f";
+        // const chainid = "80001"; // mumbai
+
+        // const url = `https://api.covalenthq.com/v1/${chainid}/tokens/${nftTicketContractAddress}/nft_metadata/${tokenId}/?key=${process.env.REACT_APP_COVALENT_API_KEY}`;
+        // const { data } = await axios.get(url);
+        // let nftData;
+        // if (data.data?.items[0].nft_data) {
+        //   console.log(data.data?.items[0].nft_data[0].external_data);
+        //   nftData = data.data?.items[0].nft_data[0].external_data;
+        // }
 
         ticketsData.push({
           tokenId: tokenId,
-          image: nftData?.image,
+          image: data?.image,
         });
 
         // console.log(data?.data.items[0].nft_data[0].external_data);
