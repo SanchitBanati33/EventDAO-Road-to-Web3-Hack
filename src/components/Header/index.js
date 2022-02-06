@@ -114,9 +114,20 @@ const Header = () =>
           </Logo>
 
           <HeaderFields>
+
           <Item exact to="/" activeClassName="selected">
             <h4>Home</h4>
           </Item>
+
+          <Item exact to="/Tickets" activeClassName="selected">
+            <h4>Tickets </h4>
+          </Item>
+
+          <Item exact to="/Organizers" activeClassName="selected">
+            <h4> Organizers </h4>
+          </Item>
+
+
           </HeaderFields>
 
 
