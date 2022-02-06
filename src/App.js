@@ -9,7 +9,9 @@ import web3 from "./ethereum/web3";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
 import NFTTicket from "./ethereum/NFTTicket";
+import OrganizerToken from "./ethereum/OrganizerToken";
 import ErrorPage from "./components/ErrorPage";
+import ProtectedRoute from "./utils/ProtectedRoute";
 const axios = require("axios");
 
 const infuraId = process.env.REACT_APP_INFURA_ID;
@@ -58,6 +60,7 @@ const App = () => {
   const [account, setaccount] = useState("");
   const [chainId, setChainId] = useState();
   const [haveTokens, setHaveTokens] = useState(false);
+  const [haveOrgTokens, setHaveOrgTokens] = useState(false);
   const [ticketsData, setTicketsData] = useState([]);
 
   const networkChanged = (chainId) => {
@@ -131,9 +134,16 @@ const App = () => {
         .balanceOf(userAddress.toString())
         .call();
 
+      const orgTokenBal = await OrganizerToken.methods
+        .balanceOf(userAddress.toString())
+        .call();
+
       console.log("NFT Ticket token balance: ", balance);
+      console.log("Org token balance: ", orgTokenBal);
 
       if (balance > 0) setHaveTokens(true);
+
+      if (orgTokenBal > 0) setHaveOrgTokens(true);
 
       let ticketsData = [];
 
@@ -230,9 +240,10 @@ const App = () => {
             />
           )}
         /> */}
-        <Route
+        <ProtectedRoute
           exact
           path="/organizers"
+          haveOrgTokens={haveOrgTokens}
           component={() => (
             <Organizers account={account} haveTokens={haveTokens} />
           )}

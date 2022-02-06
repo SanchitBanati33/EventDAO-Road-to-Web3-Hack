@@ -54,47 +54,42 @@ const Title = styled.h1`
 `;
 
 const PopUp = styled.div`
-
-height: 400px; 
-width: 500px; 
-background-color:white;
-border: solid 2px yellow;
-border-radius: 5%;
-padding: 20px 0 0 0 ;
-
+  height: 400px;
+  width: 500px;
+  background-color: white;
+  border: solid 2px yellow;
+  border-radius: 5%;
+  padding: 20px 0 0 0;
 `;
 
 const Generate = styled.button`
-text-decoration: none;
-height: 40px;
-width: 100px;
-border-radius: 50px;
-color: black;
+  text-decoration: none;
+  height: 40px;
+  width: 100px;
+  border-radius: 50px;
+  color: black;
 
-border: 1px solid white;
-display: grid;
-align-content: center;
-text-align:center;
-justify-content: space-around;
-margin: 15px 0px 0 200px;
-transition: 0.3s ease-in;
+  border: 1px solid white;
+  display: grid;
+  align-content: center;
+  text-align: center;
+  justify-content: space-around;
+  margin: 15px 0px 0 200px;
+  transition: 0.3s ease-in;
 
-&:hover {
-  transform: scale(1.1);
-  cursor: pointer;
-  background-color: #25b04a;
-}
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    background-color: #25b04a;
+  }
 
-&.selected {
-  background-color: #25b04a;
-  transform: scale(1.1);
-}
-
+  &.selected {
+    background-color: #25b04a;
+    transform: scale(1.1);
+  }
 `;
 
-const QrCode = styled.div`
-
-`;
+const QrCode = styled.div``;
 
 const Tickets = ({ ticketsData }) => {
   return (
@@ -112,16 +107,13 @@ const Tickets = ({ ticketsData }) => {
           );
         })}
       </Grid>
+
+      <PopUp>
+        <Title> Get your QR Code </Title>
+        <Generate> Generate </Generate>
+        <img src={QR} height="250px" border-radius="5%" />
+      </PopUp>
     </>
-
-    // <>
-    // <PopUp> 
-    //   <Title> Get your QR Code </Title>
-    //   <Generate> Generate </Generate>
-    //   <img src={QR} height="250px" border-radius="5%"/>
-    // </PopUp>  
-
-    // </>
   );
 };
 
