@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Ticket from "../images/ticket.png";
+import Ticket from "../images/Organizer.png";
 
 const Grid = styled.div`
   display: flex;
@@ -58,7 +58,8 @@ const Tickets = ({ tokenIds }) => {
           return (
             <Container>
               <ImgWrapper>
-                <Img src={Ticket} />
+                {/* <Img src={Ticket} /> */}
+                <img src={Ticket} height="250px" border-radius="5%" />
               </ImgWrapper>
               <Title> Ticket #{tokenId} </Title>
             </Container>
