@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import Ticket from "../images/ticket.png"
+import Ticket from "../images/Organizer.png"
 
 
 const Grid = styled.div`
@@ -59,44 +59,16 @@ const Tickets = () => {
     <Grid>
       <Container> 
           <ImgWrapper>
-          <Img src={Ticket} />
-            {/* <img src={Ticket}  height="250px" border-radius="5px"/> */}
+          {/* <Img src={Ticket} /> */}
+            <img src={Ticket}  height="250px" border-radius="5%"/>
           </ImgWrapper>
           <Title> Ticket #6808 </Title>
       </Container>
 
  
-      <Container> 
-          <ImgWrapper>
-          <Img src={Ticket} />
-            {/* <img src={Ticket}  height="250px" border-radius="5px"/> */}
-          </ImgWrapper>
-          <Title> Ticket #6808 </Title>
-      </Container>
 
-      <Container> 
-          <ImgWrapper>
-          <Img src={Ticket} />
-            {/* <img src={Ticket}  height="250px" border-radius="5px"/> */}
-          </ImgWrapper>
-          <Title> Ticket #6808 </Title>
-      </Container>
 
-      <Container> 
-          <ImgWrapper>
-          <Img src={Ticket} />
-            {/* <img src={Ticket}  height="250px" border-radius="5px"/> */}
-          </ImgWrapper>
-          <Title> Ticket #6808 </Title>
-      </Container>
 
-      <Container> 
-          <ImgWrapper>
-          <Img src={Ticket} />
-            {/* <img src={Ticket}  height="250px" border-radius="5px"/> */}
-          </ImgWrapper>
-          <Title> Ticket #6808 </Title>
-      </Container>
     </Grid>
 
 
