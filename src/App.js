@@ -8,7 +8,7 @@ import Web3Modal from "web3modal";
 import web3 from "./ethereum/web3";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
-import JorrToken from "./ethereum/JorrToken";
+import NFTTicket from "./ethereum/NFTTicket";
 import ErrorPage from "./components/ErrorPage";
 const axios = require("axios");
 
@@ -60,7 +60,7 @@ const App = () => {
   const [account, setaccount] = useState("");
   const [chainId, setChainId] = useState();
   const [haveTokens, setHaveTokens] = useState(false);
-  const [tokenIds, setTokenIds] = useState([]);
+  const [ticketsData, setTicketsData] = useState([]);
 
   const networkChanged = (chainId) => {
     console.log({ chainId });
@@ -129,23 +129,40 @@ const App = () => {
       console.log("user address: ", userAddress);
       // "0x6ff9c8ed337de934e46e773f61a1a3369617c3ce";
       //   "0x5908bfd84673974ddb8b6688501a53ac5fc92b6b";
-      const balance = await JorrToken.methods
+      const balance = await NFTTicket.methods
         .balanceOf(userAddress.toString())
         .call();
 
-      console.log("Jor token balance: ", balance);
+      console.log("NFT Ticket token balance: ", balance);
 
       if (balance > 0) setHaveTokens(true);
 
-      let tokenIds = [];
+      let ticketsData = [];
 
       for (let i = 0; i < balance; i++) {
-        const tokenId = await JorrToken.methods
+        const tokenId = await NFTTicket.methods
           .tokenOfOwnerByIndex(userAddress, i)
           .call();
-        tokenIds.push(tokenId);
+
+        const nftTicketContractAddress =
+          "0x0463E2FED074C5F6736C28a856F4efD05ADA1B8f";
+        const chainid = "80001"; // mumbai
+        const url = `https://api.covalenthq.com/v1/${chainid}/tokens/${nftTicketContractAddress}/nft_metadata/${tokenId}/?key=ckey_docs`;
+        const { data } = await axios.get(url);
+        let nftData;
+        if (data.data?.items[0].nft_data) {
+          console.log(data.data?.items[0].nft_data[0].external_data);
+          nftData = data.data?.items[0].nft_data[0].external_data;
+        }
+
+        ticketsData.push({
+          tokenId: tokenId,
+          image: nftData?.image,
+        });
+
+        // console.log(data?.data.items[0].nft_data[0].external_data);
       }
-      setTokenIds(tokenIds);
+      setTicketsData(ticketsData);
     } catch (err) {
       console.log(err);
     }
@@ -195,11 +212,11 @@ const App = () => {
             <Tickets
               account={account}
               haveTokens={haveTokens}
-              tokenIds={tokenIds}
+              ticketsData={ticketsData}
             />
           )}
         />
-        <Route
+        {/* <Route
           exact
           path="/tickets/:tokenId"
           component={() => (
@@ -209,7 +226,7 @@ const App = () => {
               tokenIds={tokenIds}
             />
           )}
-        />
+        /> */}
         <Route
           exact
           path="/organizers"

@@ -50,18 +50,18 @@ const Title = styled.h1`
   margin: 0 8%;
 `;
 
-const Tickets = ({ tokenIds }) => {
+const Tickets = ({ ticketsData }) => {
   return (
     <>
       <Grid>
-        {tokenIds.map((tokenId) => {
+        {ticketsData.map((ticket) => {
           return (
-            <Container key={tokenId}>
+            <Container key={ticket.tokenId}>
               <ImgWrapper>
                 {/* <Img src={Ticket} /> */}
-                <img src={Ticket} height="250px" border-radius="5%" />
+                <img src={ticket.image} height="250px" border-radius="5%" />
               </ImgWrapper>
-              <Title> Ticket #{tokenId} </Title>
+              <Title> Ticket #{ticket.tokenId} </Title>
             </Container>
           );
         })}
