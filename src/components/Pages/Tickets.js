@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Ticket from "../images/Organizer.png";
 import QR from "../images/QR.png";
+import QRCode from "react-qr-code";
 
 const Grid = styled.div`
   display: flex;
@@ -51,6 +52,7 @@ const Title = styled.h1`
   margin: 0 8%;
   color: blue;
   text-align: center;
+  margin-bottom: 20px;
 `;
 
 const PopUp = styled.div`
@@ -60,6 +62,9 @@ const PopUp = styled.div`
   border: solid 2px yellow;
   border-radius: 5%;
   padding: 20px 0 0 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
 `;
 
 const Generate = styled.button`
@@ -91,28 +96,32 @@ const Generate = styled.button`
 
 const QrCode = styled.div``;
 
-const Tickets = ({ ticketsData }) => {
+const Tickets = ({ ticketsData, account }) => {
   return (
     <>
       <Grid>
         {ticketsData.map((ticket) => {
           return (
-            <Container key={ticket.tokenId}>
-              <ImgWrapper>
-                {/* <Img src={Ticket} /> */}
-                <img src={ticket.image} height="250px" border-radius="5%" />
-              </ImgWrapper>
-              <Title> Ticket #{ticket.tokenId} </Title>
-            </Container>
+            <>
+              <Container key={ticket.tokenId}>
+                <ImgWrapper>
+                  {/* <Img src={Ticket} /> */}
+                  <img src={ticket.image} height="250px" border-radius="5%" />
+                </ImgWrapper>
+                <Title> Ticket #{ticket.tokenId} </Title>
+              </Container>
+              <PopUp>
+                <Title> Get your QR Code </Title>
+                {/* <Generate> Generate </Generate> */}
+                {/* <img src={QR} height="250px" border-radius="5%" /> */}
+                <QRCode
+                  value={`http://localhost:3001/Organizers?tokenId=${ticket.tokenId}&ownerAddress=${account}`}
+                />
+              </PopUp>
+            </>
           );
         })}
       </Grid>
-
-      <PopUp>
-        <Title> Get your QR Code </Title>
-        <Generate> Generate </Generate>
-        <img src={QR} height="250px" border-radius="5%" />
-      </PopUp>
     </>
   );
 };

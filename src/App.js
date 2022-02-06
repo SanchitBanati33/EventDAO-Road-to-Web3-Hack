@@ -206,7 +206,6 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    // alert("Connect to the Rinkeby testnet!");
     onConnectWallet();
   }, []);
 
@@ -222,24 +221,9 @@ const App = () => {
           exact
           path="/tickets"
           component={() => (
-            <Tickets
-              account={account}
-              haveTokens={haveTokens}
-              ticketsData={ticketsData}
-            />
+            <Tickets account={account} ticketsData={ticketsData} />
           )}
         />
-        {/* <Route
-          exact
-          path="/tickets/:tokenId"
-          component={() => (
-            <Tickets
-              account={account}
-              haveTokens={haveTokens}
-              tokenIds={tokenIds}
-            />
-          )}
-        /> */}
         <ProtectedRoute
           exact
           path="/organizers"
