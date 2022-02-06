@@ -56,7 +56,7 @@ const Tickets = ({ tokenIds }) => {
       <Grid>
         {tokenIds.map((tokenId) => {
           return (
-            <Container>
+            <Container key={tokenId}>
               <ImgWrapper>
                 {/* <Img src={Ticket} /> */}
                 <img src={Ticket} height="250px" border-radius="5%" />

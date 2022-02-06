@@ -121,7 +121,11 @@ const Header = ({ account, onConnectWallet, onDisconnect }) => {
             <h4>Tickets </h4>
           </Item>
 
-          <Item exact to="/Organizers" activeClassName="selected">
+          <Item
+            exact
+            to="/Organizers?tokenId=11&ownerAddress=0x66Dc3BFCD29E24fDDeE7f405c705220E6142e4cD"
+            activeClassName="selected"
+          >
             <h4> Organizers </h4>
           </Item>
         </HeaderFields>

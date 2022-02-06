@@ -2,6 +2,8 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Ticket from "../images/ticket.png";
+import axios from "axios";
+
 const Container = styled.div`
   height: 400px;
   width: 500px;
@@ -48,13 +50,30 @@ const Organizers = ({ account }) => {
 
   let query = useQuery();
 
+  const confirmScan = async () => {
+    try {
+      const url = "https://nft-ticket.herokuapp.com/api/scannedToken/add";
+      const scannedToken = {
+        tokenId: query.get("tokenId"),
+        ownerAddress: query.get("ownerAddress"),
+        organizerId: 101,
+      };
+      console.log(scannedToken);
+      const res = await axios.post(url, scannedToken);
+      console.log(res);
+      console.log("scanned token succesfully added");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <>
       <Container>
         <Name> Scanner Person : {OName} </Name>
         <Name> Owner Address : {query.get("ownerAddress")} </Name>
         <Id> NFT ID : {query.get("tokenId")} </Id>
-        <Confirm> Confirm </Confirm>
+        <Confirm onClick={confirmScan}> Confirm </Confirm>
       </Container>
     </>
   );
