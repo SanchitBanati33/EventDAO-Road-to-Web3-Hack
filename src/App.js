@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import Tickets from "./components/Pages/Tickets";
+import Organizers from "./components/Pages/Organizers";
 
 import Web3Modal from "web3modal";
 import web3 from "./ethereum/web3";
@@ -211,9 +212,16 @@ const App = () => {
       <Switch>
         <Route
           exact
-          path="/"
+          path="/tickets"
           component={() => (
             <Tickets account={account} haveTokens={haveTokens} />
+          )}
+        />
+        <Route
+          exact
+          path="/organizers"
+          component={() => (
+            <Organizers account={account} haveTokens={haveTokens} />
           )}
         />
         <Route
