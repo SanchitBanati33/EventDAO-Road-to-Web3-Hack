@@ -143,31 +143,9 @@ const App = () => {
         const tokenId = await JorrToken.methods
           .tokenOfOwnerByIndex(userAddress, i)
           .call();
-
         tokenIds.push(tokenId);
-
-        setTokenIds(tokenIds);
-
-        // const url = `https://api.opensea.io/api/v1/asset/0x2E9983b023934e72e1E115Ab6AEbB3636f1C4Cbe/${tokenId}/`;
-        // // `https://rinkeby-api.opensea.io/api/v1/asset/0x002aF40A6eB3C688612184C51500b97C1b89dfFC/${tokenId}/`;
-        // const { data } = await axios.get(url);
-
-        // await data.traits.map((trait) => {
-        //   //   console.log(trait);
-        //   if (trait.trait_type === "Level") {
-        //     console.log(trait.value);
-        //     if (trait.value === "Gold") {
-        //       setGold(true);
-        //       setSilver(true);
-        //       setBronze(true);
-        //     } else if (trait.value === "Silver") {
-        //       setSilver(true);
-        //       setBronze(true);
-        //     } else if (trait.value === "Bronze") setBronze(true);
-        //   }
-        //   return 0;
-        // });
       }
+      setTokenIds(tokenIds);
     } catch (err) {
       console.log(err);
     }
@@ -214,7 +192,22 @@ const App = () => {
           exact
           path="/tickets"
           component={() => (
-            <Tickets account={account} haveTokens={haveTokens} />
+            <Tickets
+              account={account}
+              haveTokens={haveTokens}
+              tokenIds={tokenIds}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/tickets/:tokenId"
+          component={() => (
+            <Tickets
+              account={account}
+              haveTokens={haveTokens}
+              tokenIds={tokenIds}
+            />
           )}
         />
         <Route

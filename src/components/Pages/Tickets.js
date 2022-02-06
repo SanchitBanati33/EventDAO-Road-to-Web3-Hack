@@ -50,49 +50,20 @@ const Title = styled.h1`
   margin: 0 8%;
 `;
 
-const Tickets = () => {
+const Tickets = ({ tokenIds }) => {
   return (
     <>
       <Grid>
-        <Container>
-          <ImgWrapper>
-            <Img src={Ticket} />
-            {/* <img src={Ticket}  height="250px" border-radius="5px"/> */}
-          </ImgWrapper>
-          <Title> Ticket #6808 </Title>
-        </Container>
-
-        <Container>
-          <ImgWrapper>
-            <Img src={Ticket} />
-            {/* <img src={Ticket}  height="250px" border-radius="5px"/> */}
-          </ImgWrapper>
-          <Title> Ticket #6808 </Title>
-        </Container>
-
-        <Container>
-          <ImgWrapper>
-            <Img src={Ticket} />
-            {/* <img src={Ticket}  height="250px" border-radius="5px"/> */}
-          </ImgWrapper>
-          <Title> Ticket #6808 </Title>
-        </Container>
-
-        <Container>
-          <ImgWrapper>
-            <Img src={Ticket} />
-            {/* <img src={Ticket}  height="250px" border-radius="5px"/> */}
-          </ImgWrapper>
-          <Title> Ticket #6808 </Title>
-        </Container>
-
-        <Container>
-          <ImgWrapper>
-            <Img src={Ticket} />
-            {/* <img src={Ticket}  height="250px" border-radius="5px"/> */}
-          </ImgWrapper>
-          <Title> Ticket #6808 </Title>
-        </Container>
+        {tokenIds.map((tokenId) => {
+          return (
+            <Container>
+              <ImgWrapper>
+                <Img src={Ticket} />
+              </ImgWrapper>
+              <Title> Ticket #{tokenId} </Title>
+            </Container>
+          );
+        })}
       </Grid>
     </>
   );

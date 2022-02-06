@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Ticket from "../images/ticket.png";
 const Container = styled.div`
@@ -37,12 +38,22 @@ const Confirm = styled.button`
 var OName = "Sanchit";
 var NftId = "6969";
 
-const Organizers = () => {
+const Organizers = ({ account }) => {
+  // A custom hook that builds on useLocation to parse
+  // the query string for you.
+  function useQuery() {
+    const { search } = useLocation();
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+  }
+
+  let query = useQuery();
+
   return (
     <>
       <Container>
         <Name> Scanner Person : {OName} </Name>
-        <Id> NFT ID : {NftId} </Id>
+        <Name> Owner Address : {query.get("ownerAddress")} </Name>
+        <Id> NFT ID : {query.get("tokenId")} </Id>
         <Confirm> Confirm </Confirm>
       </Container>
     </>
